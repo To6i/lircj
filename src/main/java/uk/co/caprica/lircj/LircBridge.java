@@ -186,9 +186,7 @@ public class LircBridge {
             String[] components;
             while (shouldRun) {
                 try {
-                    System.out.println("READ<");
                     line = socketReader.readLine();
-                    System.out.println("LINE>" + line);
                     if (!listeners.isEmpty()) {
                         if (!line.equals(SIGHUP_LINE)) {
                             components = line.split(" ");
@@ -202,7 +200,8 @@ public class LircBridge {
                     }
                 }
                 catch (IOException e) {
-                    e.printStackTrace();
+                    // an IO exception is thrown if no buttons on the remote 
+                    // ressed for a while, so simply ignore it
                 }
             }
             try {
